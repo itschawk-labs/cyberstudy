@@ -1,0 +1,90 @@
+<section class="module-panel lab-panel" aria-labelledby="lab-title">
+  <div class="panel-heading">
+    <div>
+      <p class="eyebrow">CYBERSTUDY / PRACTICE MANAGEMENT</p>
+      <h2 id="lab-title">Lab Tracker</h2>
+      <p class="muted">Log practical cybersecurity labs and review your progress.</p>
+    </div>
+    <span class="pill">Milestone 1</span>
+  </div>
+
+  <form class="lab-form" [formGroup]="labForm" (ngSubmit)="onSubmit()" novalidate>
+    <h3>{{ editingId === null ? 'Add a Lab Entry' : 'Update Lab Entry' }}</h3>
+    <p class="muted form-intro">Fields marked * are required.</p>
+
+    <div class="field">
+      <label for="lab-title-input">Lab title *</label>
+      <input id="lab-title-input" type="text" formControlName="title" placeholder="e.g. Wireshark DHCP Traffic Analysis" />
+      <p class="error" *ngIf="labForm.controls.title.touched && labForm.controls.title.invalid">
+        Enter a lab title with at least 3 characters.
+      </p>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="lab-category">Category *</label>
+        <select id="lab-category" formControlName="category">
+          <option value="">Select category</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+        <p class="error" *ngIf="labForm.controls.category.touched && labForm.controls.category.invalid">Select a category.</p>
+      </div>
+      <div class="field">
+        <label for="lab-date">Lab date *</label>
+        <input id="lab-date" type="date" formControlName="labDate" />
+        <p class="error" *ngIf="labForm.controls.labDate.touched && labForm.controls.labDate.invalid">Select a date.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="lab-status">Completion status *</label>
+      <select id="lab-status" formControlName="status">
+        <option *ngFor="let option of statuses" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="lab-notes">Lab notes / observations *</label>
+      <textarea id="lab-notes" rows="4" formControlName="notes"
+        placeholder="Tools used, evidence collected, results and lessons learned"></textarea>
+      <p class="error" *ngIf="labForm.controls.notes.touched && labForm.controls.notes.invalid">
+        Enter at least 10 characters describing the lab.
+      </p>
+    </div>
+
+    <div class="actions">
+      <button type="submit">{{ editingId === null ? 'Save Lab Entry' : 'Update Lab Entry' }}</button>
+      <button *ngIf="editingId !== null" type="button" class="button-secondary" (click)="cancelEdit()">Cancel edit</button>
+    </div>
+  </form>
+
+  <p class="feedback" role="status" *ngIf="notice">{{ notice }}</p>
+
+  <section class="entries" aria-label="Saved lab entries for this session">
+    <div class="list-heading">
+      <h3>Lab Entries <span class="count">{{ entries.length }}</span></h3>
+      <p class="muted">Temporary browser-session data; refreshing the page clears entries.</p>
+    </div>
+    <p class="empty" *ngIf="entries.length === 0">No entries yet. Complete the form to add your first lab.</p>
+
+    <article class="entry-card" *ngFor="let entry of entries; trackBy: trackById">
+      <div class="entry-top">
+        <div>
+          <h4>{{ entry.title }}</h4>
+          <p class="entry-meta">{{ entry.category }} · {{ entry.labDate }}</p>
+        </div>
+        <span class="status-pill">{{ entry.status }}</span>
+      </div>
+      <p class="entry-notes">{{ entry.notes }}</p>
+      <div class="entry-actions">
+        <button type="button" class="button-secondary" (click)="editEntry(entry)">Edit</button>
+        <button type="button" class="button-danger" (click)="requestDelete(entry.id)">Delete</button>
+      </div>
+      <div class="delete-prompt" *ngIf="pendingDeleteId === entry.id">
+        <p>Delete this lab entry? This removes it from the temporary list.</p>
+        <button type="button" class="button-danger" (click)="confirmDelete()">Confirm delete</button>
+        <button type="button" class="button-secondary" (click)="cancelDelete()">Keep entry</button>
+      </div>
+    </article>
+  </section>
+</section>

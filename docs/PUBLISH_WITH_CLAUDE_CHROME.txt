@@ -1,0 +1,13 @@
+Claude Chrome — publish CyberStudy to GitHub
+
+Use the GitHub website while I am signed in. I want the contents of the extracted `cyberstudy` folder published to a new group repository `itschawk-labs/cyberstudy`. This is for Kennesaw State University IT 6203 Milestone 1. Do NOT alter, delete, or upload anything to `itschawk-labs/mean-test`.
+
+1. First check whether `itschawk-labs/cyberstudy` already exists. If it exists, do not overwrite it or create another; inspect its files and stop to ask me how to proceed.
+2. If absent, open GitHub's New Repository page under the account `itschawk-labs`, name it `cyberstudy`, and use description: `CyberStudy — IT 6203 Angular reactive-form cybersecurity study application`. Prefer Public only if I confirm the team's permission; otherwise pause and ask. Create the repository empty (no generated README, license or gitignore), since those exist in my folder.
+3. Ask me to extract the attached/downloaded `CyberStudy_M1_GitHub_Ready.zip` locally if I have not already. GitHub must receive the ACTUAL SOURCE FILES AND FOLDERS from inside `cyberstudy/`, not a single ZIP file.
+4. Navigate to Add file > Upload files in the new GitHub repository. Upload the entire extracted folder contents, preserving the `src/`, `public/`, and `docs/` subfolders, plus root files including `.gitignore`, `angular.json`, `package.json`, `package-lock.json`, `README.md`, and tsconfig files. If Chrome cannot access local directories or preserve hierarchy, do not upload only a ZIP and do not pretend the upload worked; stop and tell me to use the terminal Git fallback.
+5. Commit with message `Add CyberStudy Milestone 1 Study Topics and Lab Tracker`. Ensure `node_modules`, `dist`, `.angular` cache, and local credentials are excluded.
+6. After committing, open the repository and verify its file tree: `src/app/study-topics/study-topics.ts`, `src/app/lab-tracker/lab-tracker.ts`, `src/styles.css`, `docs/architecture/CyberStudy_User_Flow_DRAFT.png`, `docs/evidence/lab-tracker/`, and `README.md`.
+7. Report the exact repository URL, commit result, and any files not uploaded. Do NOT claim all three group components are finished; Component 3 remains to be supplied. Do not invite collaborators unless I provide their GitHub usernames and authorize it.
+
+Ask before any ambiguous overwrite, repository visibility decision, or account change.

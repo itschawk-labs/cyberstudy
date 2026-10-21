@@ -1,0 +1,30 @@
+digraph cyberstudy {
+ graph [rankdir=TB, bgcolor="white", pad="0.35", nodesep="0.36", ranksep="0.48", splines=ortho, fontname="Arial", label="CyberStudy  |  Milestone 1 planned user flow", labelloc=t, fontsize=21, fontcolor="#17263b"];
+ node [shape=box, style="rounded,filled", fillcolor="#eef4ff", color="#9ab5df", fontname="Arial", fontsize=11, fontcolor="#17263b", margin="0.19,0.13"];
+ edge [arrowsize=.72, color="#6487bb", penwidth=1.6];
+ start [label="Open CyberStudy application",fillcolor="#193254",fontcolor="white"];
+ home [label="CyberStudy home / component selection",fillcolor="#dbeafe"];
+ start -> home;
+ {rank=same; study; lab; third;}
+ study [label="Study Topics\nReactive form (included)"];
+ lab [label="Lab Tracker\nReactive form (included)"];
+ third [label="Approved Component 3\nName and owner TO CONFIRM",fillcolor="#fef3c7",color="#d1a346"];
+ home -> study; home -> lab; home -> third;
+ create1 [label="CREATE\nEnter a new study topic",fillcolor="#ebf8ee"];
+ read1 [label="READ\nView topic records (planned)",fillcolor="#f3f7ff"];
+ update1 [label="UPDATE\nEdit topic (planned)",fillcolor="#fff5e6"];
+ delete1 [label="DELETE\nRemove topic (planned)",fillcolor="#fff0f0"];
+ create2 [label="CREATE\nAdd lab entry (in memory)",fillcolor="#ebf8ee"];
+ read2 [label="READ\nDisplay lab list (in memory)",fillcolor="#f3f7ff"];
+ update2 [label="UPDATE\nEdit entry (in memory)",fillcolor="#fff5e6"];
+ delete2 [label="DELETE\nConfirm removal (in memory)",fillcolor="#fff0f0"];
+ create3 [label="CREATE\nEnter new record (planned)",fillcolor="#ebf8ee"];
+ read3 [label="READ\nView records (planned)",fillcolor="#f3f7ff"];
+ update3 [label="UPDATE\nModify record (planned)",fillcolor="#fff5e6"];
+ delete3 [label="DELETE\nRemove record (planned)",fillcolor="#fff0f0"];
+ study -> create1 -> read1 -> update1 -> delete1;
+ lab -> create2 -> read2 -> update2 -> delete2;
+ third -> create3 -> read3 -> update3 -> delete3;
+ note [shape=note,label="Current M1 behavior: Study Topics has validation and console submission; Lab Tracker CRUD uses temporary memory.\nDatabase is NOT required. Confirm Component 3 against approved proposal before final submission.",fillcolor="#f8fafc",color="#ccd5e1",fontsize=10];
+ {delete1,delete2,delete3} -> note [style=dashed,arrowhead=none,color="#cbd5e1"];
+}

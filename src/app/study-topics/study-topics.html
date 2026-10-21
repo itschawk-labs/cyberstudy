@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="module-grid">
+    <section class="module-panel">
+
+      <h2>Study Topics</h2>
+
+      <form [formGroup]="studyTopicsForm" (ngSubmit)="onSubmit()">
+
+        <div>
+          <label for="topicName">Topic Name:</label>
+          <input
+            id="topicName"
+            type="text"
+            formControlName="topicName">
+
+          <p class="error"
+            *ngIf="studyTopicsForm.get('topicName')?.invalid &&
+                   studyTopicsForm.get('topicName')?.touched">
+            Topic Name is required.
+          </p>
+        </div>
+
+        <div>
+          <label for="category">Category:</label>
+          <input
+            id="category"
+            type="text"
+            formControlName="category">
+
+          <p class="error"
+            *ngIf="studyTopicsForm.get('category')?.invalid &&
+                   studyTopicsForm.get('category')?.touched">
+            Category is required.
+          </p>
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <textarea
+            id="description"
+            formControlName="description">
+          </textarea>
+        </div>
+
+        <div>
+          <label for="difficulty">Difficulty:</label>
+          <select
+            id="difficulty"
+            formControlName="difficulty">
+            <option value="">Select Difficulty</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+
+          <p class="error"
+            *ngIf="studyTopicsForm.get('difficulty')?.invalid &&
+                   studyTopicsForm.get('difficulty')?.touched">
+            Difficulty is required.
+          </p>
+        </div>
+
+        <div>
+          <label for="status">Status:</label>
+          <select
+            id="status"
+            formControlName="status">
+            <option value="">Select Status</option>
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+
+          <p class="error"
+            *ngIf="studyTopicsForm.get('status')?.invalid &&
+                   studyTopicsForm.get('status')?.touched">
+            Status is required.
+          </p>
+        </div>
+
+        <div>
+          <label for="notes">Notes:</label>
+          <textarea
+            id="notes"
+            formControlName="notes">
+          </textarea>
+        </div>
+
+        <button type="submit">Save Topic</button>
+
+      </form>
+
+    </section>
+  </div>
+</div>
