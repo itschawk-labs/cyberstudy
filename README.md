@@ -1,61 +1,32 @@
-# CyberStudy — IT 6203 Design Studio
+# CyberStudy — IT 6203, Milestone 2 (Group 5)
 
-**Milestone 1 team application (work in progress)**  
-Angular 22 reactive-form project for a cybersecurity study and practice tracker.
+Integrated Angular frontend, Express API, MongoDB persistence; three routed components: Study Topics, Lab Tracker, Learning Resources.
 
-## What's implemented
+## Run locally
+1. Install Node.js and npm. Configure an Atlas cluster, database user, and IP access list, or use local MongoDB.
+2. In `server/`: `npm install`; copy `.env.example` to `.env`; edit `MONGODB_URI` to point to YOUR database (including `/cyberstudy`).
+3. In `server/`: `npm start`. Verify http://localhost:8000/api/health reports a connected database.
+4. In another terminal in the project root: `npm install` then `npm start`.
+5. Open http://localhost:4200 and test all three routes: `/topics`, `/labs`, `/resources`.
 
-| Component | Status | Form behavior |
-| --- | --- | --- |
-| Study Topics | Partner contribution included | Reactive form, required-field validation; valid submissions logged to the browser console |
-| Lab Tracker | Chad Hawkins contribution included and locally tested | Reactive form with validation and temporary in-memory Create, Read, Update, Delete |
-| Third approved component | **Awaiting team confirmation/contribution** | Must be added by the assigned team member |
+The Angular development server forwards `/api` to Express using `proxy.conf.json`.
 
-The present application displays **two independent components** for Milestone 1. The exact approved third-component name and teammate assignments must be confirmed against the group's proposal. **Do not present this repository as a finished three-component project.**
+## Windows/VPN DNS workaround
+Only if Node.js raises `querySrv ECONNREFUSED` but an SRV query to 8.8.8.8 succeeds, set `DNS_SERVERS=8.8.8.8` in your PRIVATE `server/.env`. This applies to the Node process and does not alter system DNS. Don't hardcode or commit your personal DNS setting or credentials.
 
-The project has **no persistent storage**, backend, MongoDB connection, or active YouTube API integration. These are not required for Milestone 1. Lab records reset on page refresh.
+## Verification status (November 11, 2026)
+- Chad verified Express/MongoDB API Create, Read, Update and Delete for all three collections.
+- Marcianna reported browser CRUD, required-field validation, navigation, persistence after reload, and a successful Angular production build using her change-detection fix.
+- Chad ran `npm run build` successfully on the merged project and demonstrated Study Topics Create, Update and Delete on the merged frontend (screenshots provided in the team conversation).
+- Recheck browser CRUD for Lab Tracker and Learning Resources against the final GitHub version before submitting; report only confirmed test results.
+- The source ZIP is not itself proof of GitHub publication or D2L submission.
 
-## Setup (Windows / macOS / Linux)
+## Group responsibilities
+- Chad Hawkins — Backend/MongoDB, API integration, API testing and GitHub final integration.
+- Marcianna Newell — Frontend review and fixes, navigation and form behavior, UX consistency, real application screenshots and PDF report.
+- The original proposal also assigned Learning Resources to Jamil Beauge. Do not imply an absent member performed unverified work.
 
-Open a terminal in the folder containing `package.json`:
+## Submission
+`IT6203_M2_Group5.pdf`: original approved scope table, real screenshots of UI/navigation and CRUD per component, GitHub URL. Include the GitHub URL as a submission comment. Third-party API is not required for Milestone 2.
 
-```bash
-npm ci
-npm run build
-npm start
-```
-
-Then visit **http://localhost:4200/**, typed directly into the browser address bar. If `npm ci` fails due to inconsistent dependencies, review its output; `npm install` can be used if the lockfile needs regeneration.
-
-In **Study Topics**, complete the fields and click Save Topic. A valid submission is currently logged in the browser DevTools Console (no list UI). In **Lab Tracker**, use Save Lab Entry to add an item, then Edit and Delete to demonstrate temporary in-memory CRUD. Required and minimum-length validators should reject invalid values.
-
-## Project source
-
-```text
-src/
-  app/
-    study-topics/    # Partner's contribution
-    lab-tracker/     # Chad Hawkins's contribution
-    app.ts           # Displays both components for demonstration
-    app.html         # Application shell
-  styles.css         # Shared styles
-```
-
-**Do not upload** `node_modules/`, `dist/`, `.angular/`, or local log/cache files. They are excluded by `.gitignore`.
-
-## Milestone 1 evidence and next steps
-
-- User-flow diagram: [`docs/architecture/CyberStudy_User_Flow_DRAFT.png`](docs/architecture/CyberStudy_User_Flow_DRAFT.png). It shows the third component as a **placeholder**; update it before final submission using the approved proposal.
-- Lab Tracker evidence: `docs/evidence/lab-tracker/`, including real localhost screenshots and accompanying notes.
-- Lab Tracker component: tested locally by Chad using screenshots demonstrating validation and all four in-memory CRUD operations.
-- Study Topics: working form displayed in the browser; its assigned member still needs to supply report evidence and test results.
-- Third component: not included yet. Add its Angular source and screenshots.
-- Final submission: **one PDF** with the approved scope table, final three-component user flow, each member's labeled TypeScript/HTML snippets and real browser screenshot, explanations, and this shared repository URL.
-
-See [`docs/M1_SUBMISSION_CHECKLIST.md`](docs/M1_SUBMISSION_CHECKLIST.md) and [`docs/TEAM_HANDOFF.md`](docs/TEAM_HANDOFF.md).
-
-## Source and attribution
-
-The shared project began with a partner-supplied `Cyberstudy-main.zip` (Study Topics). The Lab Tracker component was contributed by Chad Hawkins. Final attribution of all components should be recorded in the approved Project Scope table; do not infer member names from placeholders.
-
-**Build verification:** user-observed local Angular development build and browser workflow are documented in screenshots. Automated CI and production build from this packaged copy are not claimed here.
+**Security:** Never commit any `.env` file, Atlas URI with credentials, or `node_modules`. The supplied `server/.env.example` contains placeholders only.
