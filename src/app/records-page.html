@@ -1,0 +1,18 @@
+<section class="panel">
+<div class="panel-heading"><div><div class="eyebrow">CYBERSTUDY / {{kind | uppercase}}</div><h2>{{config.title}}</h2><p class="muted">{{config.intro}}</p></div><span class="pill">MongoDB CRUD</span></div>
+<div class="columns"><form [formGroup]="form" (ngSubmit)="save()" novalidate>
+<h3>{{editingId ? 'Update record' : 'Create record'}}</h3><p class="muted">Fields marked * are required.</p>
+<div *ngFor="let field of config.fields"><label [for]="field.key">{{field.label}}{{field.required?' *':''}}</label>
+<select *ngIf="field.options" [id]="field.key" [formControlName]="field.key"><option value="">Choose {{field.label.toLowerCase()}}</option><option *ngFor="let option of field.options" [value]="option">{{option}}</option></select>
+<textarea *ngIf="field.multiline" [id]="field.key" [formControlName]="field.key" rows="3"></textarea>
+<input *ngIf="!field.options && !field.multiline" [id]="field.key" [type]="field.type||'text'" [formControlName]="field.key" />
+<p class="error" *ngIf="form.controls[field.key].invalid && form.controls[field.key].touched">{{field.label}} is required.</p></div>
+<div class="actions"><button [disabled]="busy" type="submit">{{editingId?'Update record':'Save record'}}</button><button class="secondary" type="button" *ngIf="editingId" (click)="cancel()">Cancel edit</button></div>
+</form><section aria-label="Saved records"><div class="list-heading"><h3>Saved {{config.title}} ({{entries.length}})</h3><button class="secondary" type="button" (click)="load()">Refresh</button></div>
+<p *ngIf="notice" role="status" class="success">{{notice}}</p><p *ngIf="error" role="alert" class="error">{{error}}</p>
+<p class="muted" *ngIf="entries.length===0 && !error">No records yet. Create one using the form.</p>
+<article class="record" *ngFor="let entry of entries"><h4>{{title(entry)}}</h4>
+<dl><ng-container *ngFor="let f of config.fields"><ng-container *ngIf="entry[f.key]"><dt>{{f.label}}</dt><dd><a *ngIf="f.key==='link' && entry[f.key].startsWith('https://')" [href]="entry[f.key]" target="_blank" rel="noopener noreferrer">{{entry[f.key]}}</a><span *ngIf="f.key!=='link' || !entry[f.key].startsWith('https://')">{{entry[f.key]}}</span></dd></ng-container></ng-container></dl>
+<div class="actions"><button type="button" class="secondary" (click)="edit(entry)">Edit</button><button type="button" class="danger" (click)="askDelete(entry._id)">Delete</button></div>
+<div class="confirm" *ngIf="pendingDeleteId===entry._id"><p>Delete this record permanently?</p><div class="actions"><button class="danger" type="button" [disabled]="busy" (click)="confirmDelete()">Confirm delete</button><button class="secondary" type="button" (click)="pendingDeleteId=null">Cancel</button></div></div>
+</article></section></div></section>
