@@ -1,0 +1,2 @@
+# Evidence for Milestone 2
+These are real browser captures shared by the project team. The images illustrate selected workflows and are not substitutes for the complete final report. Screenshots may show records being cleared as part of CRUD validation. Verify their labels against the actual captured action. Additional Lab Tracker Create/Read and Update captures should be obtained from Marcianna's complete evidence set if required for the report.
