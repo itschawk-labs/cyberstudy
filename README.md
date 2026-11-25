@@ -1,32 +1,78 @@
-# CyberStudy — IT 6203, Milestone 2 (Group 5)
+# CyberStudy — IT 6203 Milestone 3 (Group 5)
 
-Integrated Angular frontend, Express API, MongoDB persistence; three routed components: Study Topics, Lab Tracker, Learning Resources.
+CyberStudy is a web application designed to help cybersecurity students organize study topics, track hands-on laboratory exercises, and maintain a collection of educational resources.
 
-## Run locally
-1. Install Node.js and npm. Configure an Atlas cluster, database user, and IP access list, or use local MongoDB.
-2. In `server/`: `npm install`; copy `.env.example` to `.env`; edit `MONGODB_URI` to point to YOUR database (including `/cyberstudy`).
-3. In `server/`: `npm start`. Verify http://localhost:8000/api/health reports a connected database.
-4. In another terminal in the project root: `npm install` then `npm start`.
-5. Open http://localhost:4200 and test all three routes: `/topics`, `/labs`, `/resources`.
+The application uses the MEAN stack: MongoDB, Express.js, Angular, and Node.js.
 
-The Angular development server forwards `/api` to Express using `proxy.conf.json`.
+Milestone 3 extends the existing MongoDB CRUD application with an integration using **YouTube Data API v3**.
 
-## Windows/VPN DNS workaround
-Only if Node.js raises `querySrv ECONNREFUSED` but an SRV query to 8.8.8.8 succeeds, set `DNS_SERVERS=8.8.8.8` in your PRIVATE `server/.env`. This applies to the Node process and does not alter system DNS. Don't hardcode or commit your personal DNS setting or credentials.
+## 1. Project Overview
 
-## Verification status (November 11, 2026)
-- Chad verified Express/MongoDB API Create, Read, Update and Delete for all three collections.
-- Marcianna reported browser CRUD, required-field validation, navigation, persistence after reload, and a successful Angular production build using her change-detection fix.
-- Chad ran `npm run build` successfully on the merged project and demonstrated Study Topics Create, Update and Delete on the merged frontend (screenshots provided in the team conversation).
-- Recheck browser CRUD for Lab Tracker and Learning Resources against the final GitHub version before submitting; report only confirmed test results.
-- The source ZIP is not itself proof of GitHub publication or D2L submission.
+CyberStudy contains three main components:
 
-## Group responsibilities
-- Chad Hawkins — Backend/MongoDB, API integration, API testing and GitHub final integration.
-- Marcianna Newell — Frontend review and fixes, navigation and form behavior, UX consistency, real application screenshots and PDF report.
-- The original proposal also assigned Learning Resources to Jamil Beauge. Do not imply an absent member performed unverified work.
+### Study Topics
+Allows users to create, view, update, and delete cybersecurity study topics, including difficulty, category, progress, and notes.
 
-## Submission
-`IT6203_M2_Group5.pdf`: original approved scope table, real screenshots of UI/navigation and CRUD per component, GitHub URL. Include the GitHub URL as a submission comment. Third-party API is not required for Milestone 2.
+### Lab Tracker
+Allows users to document technical exercises, track completion status, associate laboratories with study topics, and record tools used.
 
-**Security:** Never commit any `.env` file, Atlas URI with credentials, or `node_modules`. The supplied `server/.env.example` contains placeholders only.
+### Learning Resources
+Allows users to save documentation, tutorials, courses, articles, and videos relevant to cybersecurity education.
+
+### YouTube API Integration
+The Express backend connects to YouTube Data API v3 to retrieve educational videos using search queries.
+
+Search responses contain video titles, channels, descriptions, publication dates, thumbnails, and video URLs.
+
+The Angular search interface and automatic search-result saving workflow remain pending frontend integration.
+
+## 2. Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Angular, TypeScript, HTML, CSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas, Mongoose |
+| Third-party API | YouTube Data API v3 |
+| Development environment | Visual Studio Code |
+| Version control | Git and GitHub |
+
+## 3. Repository
+
+**GitHub:** https://github.com/itschawk-labs/cyberstudy
+
+**Milestone 3 branch:** `milestone-3`
+
+**Verified backend commit:** `19f616b9178e1231b07915903e0d3a54e11bc4c1`
+
+The Milestone 3 backend is committed to GitHub. The frontend YouTube integration is being completed separately.
+
+## 4. Local Installation
+
+### Requirements
+
+- Node.js 22 or a compatible version supporting built-in `fetch` and `AbortSignal.timeout`
+- npm
+- MongoDB Atlas or a local MongoDB instance
+- A Google Cloud API key authorized to use YouTube Data API v3
+
+### Install Backend Dependencies
+
+From the repository root:
+
+1. Navigate to `server/`.
+2. Run `npm install`.
+3. Copy `.env.example` to `.env`.
+4. Configure the private environment variables.
+
+### Environment Configuration
+
+The private `server/.env` file should contain:
+
+| Variable | Purpose |
+|---|---|
+| `MONGODB_URI` | MongoDB connection string |
+| `PORT` | Express server port; default 8000 |
+| `CLIENT_ORIGIN` | Allowed Angular origin |
+| `YOUTUBE_API_KEY` | Private YouTube Data API v3 credential |
+| `DNS_SERVERS` | Optional Node.js
